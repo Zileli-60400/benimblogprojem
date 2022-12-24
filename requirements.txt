@@ -1,0 +1,5 @@
+Django==4.1
+django-ckeditor==22.3.1
+django-cleanup==6.0.0
+django-crispy-forms==1.14.0
+django-cjs-asset==2.0.0
