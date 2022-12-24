@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+{% load crispy_forms_tags %}<!--djangoda crispy filter yazıp bu kodu dahil ettik-->
+
+ <div class="row"><!--bootstrap4 grid sayfasından bu kodu olarak formumuzu ortalayalım.form bilgilerini bu class ın içine attık ortaladı ekranı küçültsek bile ortalanacak cep tel bile bu sağlanacak responsive görünüm elde edeceğiz  -->
+    
+    <div class="col-md-6 offset-md-3">
+
+        <h3>Giriş Yap</h3>
+        <hr>
+        <form method="post">
+
+            {% csrf_token %}<!-- siteye sanki kullanıcıymış gibi girmek isteyen saldırıları önceden tespit edip önleyen csrf saldırılarına karşı kullanırız istemciye "input type="hidden" name="csrf-token" value="CIwNZNlR4XbisJF39I8yWnWX9wX4WFoz" şeklinde iletim gönderir-->
+            {{form|crispy}}
+            <br>
+            <button type="submit"class="btn btn-danger" >Giriş Yap</button>
+        
+        
+        </form>
+    
+    </div>
+    
+    
+  </div>
+
+
+{% endblock body  %}
+<!--Ancak username  ve password girintisi hizalı değil django-crispy-forms diye bir modül indireceğiz.django-crispy-forms diye google e yazıp django sayfasından pip kodunu alıp Terminalde çalıştırıp indirelim daha sonra settings.py de install App ye 'crispy_forms'u ekleyelim -->

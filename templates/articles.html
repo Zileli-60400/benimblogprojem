@@ -1,0 +1,88 @@
+{% extends "layout.html"%}
+{% block body %}
+
+    
+
+<div class="row">
+    <div class="col-md-10 offset-md-3"><!--başlığı ortalamak için class="row" altına ekleyip en sonda div kapattık(</div>)-->
+        <div class="col-lg-8">
+            <h3>Makaleler</h3>
+            <hr>   
+        </div>
+    </div>
+</div>    
+             
+<div class="row">
+    <div class="col-md-10 offset-md-3"><!--başlığı ortalamak için class="row" altına ekleyip en sonda div kapattık(</div>)-->
+        <div class="col-lg-80">            
+            <form>              
+               {% csrf_token %}<!--keyword leri şifreli şekilde korumalı getirir -->
+               <input type="text" name="keyword" class="input-sm" maxlenght="64" placeholder="Ara..........">
+           <button type="submit" class="btn btn-danger">Ara</button>
+           </form>      
+       </div>
+   </div>
+</div>        
+            
+
+{% if articles %}
+
+{% for article in articles %}<!--article varsa for döngüsü ile ekrana yazdıracağız bunun için detail sayfasındaki yapımı almak istiyorum-->
+<div class="row">
+    <div class="col-md-10 offset-md-3"><!--makaleyi ortalamak için class="row" altına ekleyip en sonda div kapattık(</div>)-->
+    <div class="col-lg-8">
+        <article>
+            <header
+                <!-- Post title-->
+                <!--<a href="/articles/article/{{article.id}}"><h3 class="fw-bolder mb-2">{{article.title}}</h3></a> <!--başlığa bağlantı verdik-->
+                <a href="{% url 'article:detail' article.id %}"><h3 class="fw-bolder mb-2">{{article.title}}</h3></a><!--navbar.html de tanımladığmğz dinamik url yi buradada göstermeliyiz "article:detail' article.id" ile article içindeki  detail e git id sini al demiş olduk-->
+                
+                <hr>
+                <p>
+               
+                {{article.author.username}} tarafından yayınlandı
+                </p>
+                <hr>
+                
+                <p>{{article.created_date}}</p>
+                <hr>
+
+                <!--preview image-->
+                {% if article.article_image %} 
+                <img class="img-fluid rounded" src="{{article.article_image.url}}" alt=""> <!--html de göstermek için -->
+                {% else %}
+
+                {% endif %}
+                
+            </header>
+            
+            <!-- Post content-->
+            <p class="lead">{{article.content|safe|truncatewords:40}}</p><!--|safe sayfaları oldoğu gibi değil html sayfası olarak gösterilmesini sağlıyor aksi takdirde sayfada kodları aynen gösterir.Django templates filter sayfasından diğer filtreleride | işaretinden sonra ekleyerek kullanabiliriz.Mesela transcatewords:40 yazınca ilk 40 kelimeyi görüntüler  -->
+            <a style="float:right;" href="/articles/article/{{article.id}}" class="btn btn-danger">devamını oku</a><!--buton ekleyip sağa aldık-->
+            <hr>
+            
+            
+            
+        </article>
+        
+        
+    </div>
+    </div>
+{% endfor %}
+
+
+
+{% else %} 		
+<div class="row">
+    <div class="col-md-10 offset-md-3"><!--makaleyi ortalamak için class="row" altına ekleyip en sonda div kapattık(</div>)-->
+        <div class="col-lg-8">
+<div class="alert alert-danger">
+    Makale Bulunamadı 
+</div>
+</div>
+</div>
+
+
+
+{% endif %}
+{% endblock body %}

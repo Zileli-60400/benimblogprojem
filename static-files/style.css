@@ -1,0 +1,6 @@
+p {
+    background: rgb(85, 107, 18);
+}
+
+
+/*static klasörü oluşturduk içinde style.css dosyası oluşturduk index.html de göstereceğiz.resim gibi static dosyaları burda kullanıyoruz.django documantasyondan static dosyaların kullanımına bakabiliriz*/

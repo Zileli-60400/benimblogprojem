@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<div class="jumbotron text-center">
+    <h3>Yazılım bilimi bloğuna hoş geldiniz</h3>
+    <p>Bu blogta geliştirici olarak yazılarınızı yazarak insanlara yardımcı olabilirsiniz</p>
+
+</div> 
+<p>
+    {% if request.user.is_authenticated   %}
+         {{request.user.username}} adıyla giriş yaptınız.Hoşgeldiniz...
+    {% else %} 		
+        Giriş Yapılmamıştır 
+    {% endif %} 
+</p>
+<p>
+    {{number1}}
+</p>
+<p>
+    {{number2}}
+</p>
+{% if number1 > number2 %}
+
+    <p>{{number1}} daha büyüktür</p>
+{% else %}
+    <p>{{number2}} daha büyüktür</p>
+    
+    
+{% endif %}
+<ol>
+{% for number in numbers  %}
+
+
+    <li> {{number}}</li>
+{% endfor %}    
+</ol>
+
+{% endblock body %}
+    

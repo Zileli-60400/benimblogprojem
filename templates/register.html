@@ -1,0 +1,41 @@
+<!--Tarayıcıda localhost:8000/user/register/ adresinde görünüme bakalım-->
+
+{% extends 'layout.html' %}
+
+{% block body %}
+
+
+<form method="post">    
+    {% load crispy_forms_tags %}<!--djangoda crispy filter yazıp bu kodu dahil ettik-->
+
+    <div class="row"><!--bootstrap4 grid sayfasından bu kodu olarak formumuzu ortalayalım.form bilgilerini bu class ın içine attık ortaladı ekranı küçültsek bile ortalanacak cep tel bile bu sağlanacak responsive görünüm elde edeceğiz  -->
+       
+       <div class="col-md-6 offset-md-3">
+   
+           <h3>Kayıt Ol</h3>
+           <hr>
+           <form method="post">
+   
+               {% csrf_token %}<!--Django, {% csrf_token %}kötü niyetli saldırıları önlemek için uygulanan bir etikete sahiptir. Sayfayı oluştururken sunucu tarafında bir jeton oluşturur ve bu jetonun geri gelen herhangi bir istek için çapraz kontrol edilmesini sağlar. Gelen istekler jetonu içermiyorsa yürütülmez.formun içine eklenir. Bu basit eklemeyle, CSRF saldırılarından kaçınılabilir, böylece bir kullanıcıdan sunucuya gönderilen isteklerin güvenliği sağlanır.-->
+               {{form|crispy}}
+               <br>
+               <button type="submit"class="btn btn-danger" >Giriş Yap</button>
+           
+           
+           </form>
+       
+       </div>
+       
+       
+     </div>
+    
+    <!--{{form.as_p}}-->
+
+    <!--<button type="submit" class="btn btn-danger">Kayıt Ol</button>-->
+
+</form><!--formun sayfada görünmesi için djangoda{{form.as_p}} şeklinde çağırmalıyız django dökümanlarda değişik form örnekleri var crispy eklediğimiz için {{form.as_p}} yerine daha güzel görünmesi için {{form|crispy}} kullandık-->    
+
+
+{% endblock body  %}
+<!--Terminalde python manage.py runserver komutunu çalıştır-->
+<!--Tarayıcıda localhost:8000/user/register/ adresinde görünüme bakalım-->

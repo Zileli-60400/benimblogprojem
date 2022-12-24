@@ -1,0 +1,27 @@
+{% extends "layout.html" %}
+{% block body %}
+{% load crispy_forms_tags %}<!--djangoda crispy filter yazıp bu kodu dahil ettik-->
+
+ <div class="row"><!--bootstrap4 grid s olarak formumuzu ortalayalım.form bilgilerini bu class ın içine attık ortaladı ekranı küçültsek bile ortalanacak cep tel bile bu sağlanacak responsive görünüm elde edeceğiayfasından bu koduz  -->
+    
+    <div class="col-md-6 offset-md-3">
+
+        <h3>Makale Oluştur</h3>
+        <hr>
+        <form method="post">
+
+            {% csrf_token %}
+            {{form.media}}<!--ck editörü template dahil ettik  -->
+            {{form|crispy}}
+            <br>
+            <button type="submit"class="btn btn-danger" >Makale Ekle</button>
+        
+        
+        </form>
+    
+    </div>
+    
+    
+  </div>
+
+{% endblock body %}

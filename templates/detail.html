@@ -1,0 +1,77 @@
+{% extends "layout.html"%}
+{% block body %}<!--startbootstrap blog post adresine git 900*400 şeklinde görünen görünümü tıklayıp aç sağ tıkla sayfa kaynağını görüntüle row ile başlayan kodu kopyala includes klasöründe posttemplateadında oluşturduğun dosyaya yapıştır aynı kodu burayada yapıştır.kodu çalıştırınca başlığa tıklayınca aynı içerik gelecektir şimdi bazı bölümleri kaldırıp kendimiz views.py de oluşturduğum detail makale sayfasına göre tanımlayalım  -->
+<div class="row">
+    <div class="col-lg-8">
+        <article>
+            <header
+                <!-- Post title-->
+                <h3 class="fw-bolder mb-8">{{article.title}}</h3>
+                <hr>
+                <p>
+                by
+                {{article.author.username}}
+                </p>
+                <hr>
+                
+                <p>{{article.created_date}}</p>
+                <hr>
+
+                <!--preview image-->
+                {% if article.article_image %} 
+                <img class="img-fluid rounded" src="{{article.article_image.url}}" alt=""> <!--html de göstermek için -->
+                {% else %}
+
+                {% endif %}
+                
+            </header>
+            
+            <!-- Post content-->
+            <p class="lead">{{article.content|safe}}</p>
+        </article>
+        
+            <hr>
+            <h4>Yorumlar</h4>
+            <hr>
+            {% if comments %}
+
+            {% for comment in comments %}
+            <div class="d-flex">
+                <div class="flex-shrink-0"><img class="rounded-circle" src="https://dummyimage.com/50x50/ced4da/6c757d.jpg" alt="..." /></div>
+                <div class="ms-3">
+                    <div class="fw-bold">{{comment.comment_author}}</div>
+                    {{comment.comment_date}}<br>
+                    {{comment.comment_content}}
+                </div>
+            </div>
+            {% endfor %}
+            
+            {% else %}
+                <div class="alert alert-danger">
+                Bu makaleye herhangi bir yorum yazılmamış... ilk yorum yapan siz olun.
+                </div>    
+            {% endif %}
+            <div class="card my-4">             
+                <h5 class="card-header">Yorum ekle</h5>
+                <div class="card-body" 
+            
+                    <form method="post" action="{% url 'article:comment' article.id %}"> <!--/articles/article/article.id ye gitsin method post olsun ve method post olsun urls.py de url oluşturalım-->
+                        {% csrf_token %}
+                        <div class="form-group"><!--Boastraptan form grup kodu alalım-->
+                            <label for="formGroupExampleInput">İsim</label>
+                            <input type="text" class="form-control" id="formGroupExampleInput" placeholder="İsminizi giriniz">
+                        </div>
+                        <div class="form-group">
+                                <label for="formGroupExampleInput">Yorum</label>
+                            <textarea name="comment_content" class="form-control" rows="3" placeholder="Lütfen Yorumunuzu buraya yazınız!"></textarea>
+                        </div>   
+                        <button type="submit" class="btn btn-primary" >Ekle</button> 
+                    </form>    
+                </div>
+            </div>      
+            
+    
+ 
+
+
+
+{% endblock body %}

@@ -1,0 +1,19 @@
+{
+    "editor.insertSpaces": true,
+    "files.autoSave": "afterDelay",
+    "editor.wordWrap": "on",
+    "npm.fetchOnlinePackageInfo": true,
+    "json.schemaDownload.enable": true,
+    "git.autofetch": true,
+    "workbench.settings.enableNaturalLanguageSearch": false,
+    "extensions.experimental.useUtilityProcess": true,
+    "css.format.spaceAroundSelectorSeparator": true,
+    "vsintellicode.features.apiExamples": "disabled",
+    "vsintellicode.features.apiExamplests": "disabled",
+    "cSpell.words": [
+        "addarticle",
+        "oluşturalım",
+        "stylesheetparser",
+        "tabindex"
+    ]
+}

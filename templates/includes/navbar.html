@@ -1,0 +1,53 @@
+<!--templates altında includes adında klasör oluşturup navbar.html adında dosya oluşturalım flasktaki dosyamızdan kodları alalım-->
+<nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand" href="/">YB Blog</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <!--<a class="nav-link" href="/about">Hakkımızda</a>burada urls.p de tanımladığımız about.html ye gider ancak tek dosya olduğu için sorun olmaz proje büyüdüğünde dosyaların her birini ayrı göstermemiz gerekir buda zor olur bunun önüne dinamik url ile geçeriz -->
+                <a class="nav-link" href="{% url 'about' %}">Hakkımızda</a><!--about olan name git -->
+            <li class="nav-item active">
+                <!--<a class="nav-link" href="/articles/addarticle">Makalele Oluştur</a>-->
+                <a class="nav-link" href="{% url 'article:addarticle' %}">Makalele Oluştur</a><!--articles uygulaması içindeki addarticle isimli name e git-->
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'article:articles' %}">Makaleler</a>
+                
+            </li>
+        
+        </ul>
+        
+        
+        <ul class="navbar-nav ml-auto-auto"><!--navbarın sağında menüleri ml biçimlendirmesiyle göstereceğiz-->
+            
+        {% if request.user.is_authenticated %}<!--usergirişi yapılmışsa kontrol paneli ve Çıkış yap görünsün    -->
+        <li class="nav-item active">
+            <!--<a class="nav-link" href="/articles/dashboard">Kontrol Paneli</a>-->
+            <a class="nav-link" href="{% url 'article:dashboard' %}">Kontrol Paneli</a>
+        </li>    
+        <li class="nav-item active">
+            <!--<a class="nav-link" href="/user/logout">Çıkış Yap</a>-->
+            <a class="nav-link" href="{% url 'user:logout' %}">Çıkış Yap</a>
+        </li>
+
+        {% else %}<!--user girişi yapılmamışsa Giriş yap görünsün    -->
+        <li class="nav-item active">
+            <!--<a class="nav-link" href="/user/login">Giriş yap</a>-->
+            <a class="nav-link" href="{% url 'user:login' %}">Giriş yap</a><!--user içindeki login e gideceğiz-->
+        </li>
+
+        {% endif %}
+
+         <li class="nav-item active"><!--if else bloğu dışında olduğu için kayıt ol hep görünür    -->
+            <!--<a class="nav-link" href="/user/register">Kayıt Ol</a>-->
+            <a class="nav-link" href="{% url 'user:register' %}">Kayıt Ol</a>
+        </li>
+        
+        </ul>        
+                  
+    </div>
+    
+</nav>
